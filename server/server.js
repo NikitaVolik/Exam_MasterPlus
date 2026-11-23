@@ -199,6 +199,10 @@ app.post("/api/items", auth, async (req, res) => {
     errors.address = "Введите корректную дату визита"
   }
 
+  if (Object.keys(errors).length > 0) {
+    return res.status(400).json({ message: "Проверьте поля", errors })
+  }
+
   try {
     const [result] = await db.query(
       `
